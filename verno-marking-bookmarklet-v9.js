@@ -1,7 +1,9 @@
 /**
- * verno-marking-bookmarklet v8.15
+ * verno-marking-bookmarklet V9
  *
- * Bookmarklet для быстрой разметки диалогов бота в JACP.
+ * Bookmarklet для быстрой разметки диалогов бота в JCP.
+ *
+ * ТЕКУЩАЯ ЛОГИКА
  *
  * 1. Верхняя панель диалога:
  *    - сначала нажимает метку проверяющего "ФИО";
@@ -71,8 +73,8 @@
  *    - в конце выводится количество размеченных и пропущенных сообщений.
  *
  * КАК ПОЛЬЗОВАТЬСЯ:
- * В URL закладки вставляется скрипт
- * verno-marking-bookmarklet-v8.15.min.js одной строкой, начиная с "javascript:".
+ * В URL закладки вставляется минифицированный файл
+ * verno-marking-bookmarklet-V9.min.js одной строкой, начиная с "javascript:".
  *
  * ГДЕ МЕНЯТЬ ПРАВИЛА:
  * - безопасные классы -> SKIP_CLASSES;
@@ -87,7 +89,7 @@
  */
 
 javascript:(async () => {
-  const SCRIPT_VERSION = 'v8.15';
+  const SCRIPT_VERSION = 'V9';
   console.log('verno-marking-bookmarklet ' + SCRIPT_VERSION + ' запущен');
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   const norm = (t) => (t || '').replace(/\s+/g, ' ').trim().toLowerCase();
@@ -311,7 +313,7 @@ javascript:(async () => {
     /^нет\s*(?:спасибо|спс|пасиб[оа]?)(?:\s+(?:большое|огромное))?$/,
     /^нет\s+не\s+нужно\s+спасибо$/,
     /^(?:всё|все)(?:\s+спасибо)?$/,
-    /^(?:спасибо\s*)?(?:вопросов\s+(?:больше\s+)?нет|больше\s+вопросов\s+нет|нет\s+больше\s+вопросов)$/,
+    /^(?:спасибо\s*)?(?:вопросов\s+(?:больше\s+)?нет|больше\s+вопросов\s+нет|нет\s+(?:больше\s+)?вопросов)$/,
   ];
 
   const isNoMoreQuestionsMessage = (container) => {
@@ -912,7 +914,7 @@ javascript:(async () => {
           'padding:6px 8px;cursor:pointer;font-size:12px;border-top:2px solid #ddd;background:#fafafa;';
         customItem.innerHTML =
           '<div style="font-weight:600;color:#b36b00;">«' + rawQuery + '»</div>' +
-          '<div style="color:#999;margin-top:1px;">Тематики нет в списке — нажмите, чтобы добавить комментарий</div>';
+          '<div style="color:#999;margin-top:1px;">тематика не из списка — нажмите, чтобы вставить как есть</div>';
         customItem.addEventListener('mouseenter', () => {
           customItem.style.background = '#fff3e0';
         });
